@@ -1,13 +1,17 @@
 node 'freeplastic.local' {
-  $user_full_name = 'Paulo Suzart'
-  $user_email = 'paulosuzart@gmail.com'
-  $user_name = 'suzart'
-  $user_home = "/home/$user_name"
+  $user_full_name = extlookup(user_full_name)
+  $user_email = extlookup(user_email)
+  $user_name = extlookup(user_name)
+  $user_home = extlookup(user_home)
   $workspace = "$user_home/workspace"
- 
-  include convenience
+
+  class { 'convenience' :
+    setup_ssh_rsa => true,
+  }
+
   include desktop
   include 'docker'
+
   class {'developer_role':
     git           => true,
     change_prompt => true,
@@ -17,13 +21,13 @@ node 'freeplastic.local' {
     gvm           => true,
     pg_databases  => {
                     'dashboard'       => {owner    => 'dashboard',
-                                          password => 'dashboard'},
+                                          password => extlookup('pg_dashboard_password')},
                     'configs'         => {owner => 'dashboard',
-                                          password => 'dashboard'},
+                                          password => extlookup('pg_dashboard_password')},
     },
     python_virtualenvs => {"$workspace/ENV" => {packages => ['setuptools', 'fabric','python-simple-hipchat']}},
     gvm_packages       => {
-    	                   #groovy versions
+      	                   #groovy versions
                            'groovy'  => {version     => '1.8.8',
                                          is_default  => true},
                            #grails versions

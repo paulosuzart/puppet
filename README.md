@@ -13,6 +13,12 @@ As seguinte variáveis são **MANDATÓRIAS** para um node:
    - `$user_name`. Nome do usuário usado para home e execução de recursos
    - `$user_home`. Usada para instalação
 
+External Lookup
+---------------
+
+Observe que variáveis com valores sensíveis (necessitam de segurança), estão em um arquivo de external lookup. Crie
+o seu.
+
 Classe principal `developer_role`:
 --------------------------------------------
 
@@ -24,7 +30,7 @@ Classe principal `developer_role`:
    - `lein          => true,`. Instalar leiningen  [Opcional]
    - `gvm           => true,`. Instala GVM [Opcional]
 
-** Pacotes e ferramentas instalados por padrão**
+**Pacotes e ferramentas instalados por padrão**
 
    - class `convenience`. Instala `vim-gtk`, `ack-grep`, `htop`, `kdiff3`, `meld`, `terminator` e `sed`
    - Python + Pip + Virtualenv [Incondicional]   
@@ -65,10 +71,16 @@ GVM Intalação de pacotes (requer : `gvm => true`)
                           },
     }
 
+Instalação chave ssh publica/privada:
+
+    class { 'convenience' :
+      setup_ssh_rsa => true,
+    }
+
+
 TODO
 -----
    - Permitir acesso à toda rede da máquina no pg_hba - **TODO**
-   - Criar role kaufda_developer_role que herda developer_role e clona repositórios, restaura banco - **TODO**
    - Customizar ack-grep - **TODO**
    - Configurar profile minimo leiningen **DONE**
    - Instalar postgis
@@ -77,8 +89,7 @@ TODO
 IMPORTANT: Dependencies
 -----------------------
 These manifests depends on the following puppet forge modules:
-`puppetlabs/postgresql`
-`stankevich/python`
-`garethr/docker`
+
+`puppetlabs/postgresql`, `stankevich/python`, `garethr/docker`
 
 
