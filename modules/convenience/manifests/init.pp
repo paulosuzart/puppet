@@ -21,7 +21,7 @@ class convenience ($setup_ssh_rsa = false) {
 
   if $setup_ssh_rsa {
     file { "$user_home/.ssh/id_rsa" :
-      ensure  => file
+      ensure  => file,
       mode    => 644,
       owner   => $user_name,
       content => extlookup('ssh_private_key_rsa'),
@@ -32,7 +32,7 @@ class convenience ($setup_ssh_rsa = false) {
       ensure  => file,
       mode    => 600,
       owner   => $user_name,
-      content => extlookup('ssh_public_key_rsa')
+      content => extlookup('ssh_public_key_rsa'),
       require => [Package['openssh-server'], Package['openssh-client']]
     }
   }

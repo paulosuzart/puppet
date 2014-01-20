@@ -90,6 +90,8 @@ IMPORTANT: Dependencies
 -----------------------
 These manifests depends on the following puppet forge modules:
 
-`puppetlabs/postgresql`, `stankevich/python`, `garethr/docker`
+`puppetlabs/postgresql`, `stankevich/python`, `garethr/docker`, `maestrodev/wget`.
+
+Para instalar os módulos dependentes, basta usar puppet module install $nome_do_modulo
 
 
