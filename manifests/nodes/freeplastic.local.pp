@@ -7,7 +7,7 @@ node 'freeplastic.local' {
  
   include convenience
   include desktop
-  
+  include 'docker'
   class {'developer_role':
     git           => true,
     change_prompt => true,
