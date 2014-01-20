@@ -77,5 +77,8 @@ TODO
 IMPORTANT: Dependencies
 -----------------------
 These manifests depends on the following puppet forge modules:
-`apt`  `concat`  `firewall`  `postgresql`  `python`  `stdlib`  `wget`
+`puppetlabs/postgresql`
+`stankevich/python`
+`garethr/docker`
+
 
