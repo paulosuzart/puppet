@@ -25,7 +25,7 @@ define developer_role::gvm::gvm_package ($version, $is_default = false) {
   $gvm_init = $developer_role::gvm::gvm_init
 
   exec { $name :
-  	environment  => "HOME=$user_home",
+    environment  => "HOME=$user_home",
     command      => "bash -c '$gvm_init && gvm install $name $version'",
     unless       => "test -d $user_home/.gvm/$name/$version",
     user         => $user_name,

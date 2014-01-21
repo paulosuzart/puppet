@@ -33,7 +33,7 @@ Classe principal `developer_role`:
 **Pacotes e ferramentas instalados por padrão**
 
    - class `convenience`. Instala `vim-gtk`, `ack-grep`, `htop`, `kdiff3`, `meld`, `terminator`, `openssh-{client, server}` e `sed`
-   - Python + Pip + Virtualenv [Incondicional]   
+   - Python + Pip + Virtualenv [Incondicional]
 
 **Customizações**
   
@@ -57,6 +57,7 @@ Criação de Virtualenv e seus pacotes instalados via pip:
 
 GVM Intalação de pacotes (requer : `gvm => true`)
 
+```puppet
     gvm_packages       => {
                            #groovy versions
                            'groovy'  => {version     => '1.8.8',
@@ -70,6 +71,7 @@ GVM Intalação de pacotes (requer : `gvm => true`)
                                          is_default  =>  true}
                           },
     }
+````
 
 Instalação chave ssh publica/privada:
 
@@ -77,6 +79,9 @@ Instalação chave ssh publica/privada:
       setup_ssh_rsa => true,
     }
 
+This Dockerfile
+---------------
+O Dockerfile disponível no projeto foi usado para fazer o setup de um container docker com o puppet e pupetdashboad. O puppetdb instalado não é utilizado.
 
 TODO
 -----

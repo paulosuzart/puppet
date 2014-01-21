@@ -4,7 +4,7 @@
 #
 define developer_role::python::python_package ($virtualenv)  {
   
-  python::pip {$name :
+  python::pip { $name :
     virtualenv => $virtualenv,
     require    => Class['python'],
     ensure     => present,

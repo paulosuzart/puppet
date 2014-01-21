@@ -7,7 +7,7 @@ class developer_role::clojure {
   verbose => true,
   execuser => $user_name,
   }~>
-  file { "$user_home/bin/lein" :
+  file { "$user_home/bin/lein" : #just changes permition. Is there other way?
     mode => 0777,
     owner => $user_name,
   }
