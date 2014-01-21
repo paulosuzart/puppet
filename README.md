@@ -32,7 +32,7 @@ Classe principal `developer_role`:
 
 **Pacotes e ferramentas instalados por padrão**
 
-   - class `convenience`. Instala `vim-gtk`, `ack-grep`, `htop`, `kdiff3`, `meld`, `terminator` e `sed`
+   - class `convenience`. Instala `vim-gtk`, `ack-grep`, `htop`, `kdiff3`, `meld`, `terminator`, `openssh-{client, server}` e `sed`
    - Python + Pip + Virtualenv [Incondicional]   
 
 **Customizações**

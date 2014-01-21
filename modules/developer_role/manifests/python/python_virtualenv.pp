@@ -7,7 +7,7 @@ define developer_role::python::python_virtualenv ($packages, $python_version = '
   python::virtualenv { $name :
        ensure   => present,
        version  => $python_version,
-       owner    => $::user_name,
+       owner    => $user_name,
        require => Class['python']
   }->
 

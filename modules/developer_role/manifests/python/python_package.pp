@@ -8,5 +8,6 @@ define developer_role::python::python_package ($virtualenv)  {
     virtualenv => $virtualenv,
     require    => Class['python'],
     ensure     => present,
+    owner      => $user_name
   }
 }

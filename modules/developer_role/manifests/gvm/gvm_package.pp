@@ -22,7 +22,8 @@
 
 define developer_role::gvm::gvm_package ($version, $is_default = false) {
 
-  $gvm_init = "source $user_home/.gvm/bin/gvm-init.sh"
+  $gvm_init = $developer_role::gvm::gvm_init
+
   exec { $name :
   	environment  => "HOME=$user_home",
     command      => "bash -c '$gvm_init && gvm install $name $version'",
@@ -38,9 +39,9 @@ define developer_role::gvm::gvm_package ($version, $is_default = false) {
   	  environment => "HOME=$user_home",
   	  command     => "bash -c '$gvm_init && gvm default $name $version'",
   	  user        => $user_name,
-  	  path        => "/usr/bin:/usr/sbin:/bin",
-  	  subscribe   => Exec["$name"],
+  	  path        => '/usr/bin:/usr/sbin:/bin',
   	  logoutput   => true,
+      unless      => "test \"$version\" = \$(find $user_home/.gvm/$name -type l -printf '%p -> %l\\n'| awk '{print \$3}' | awk -F'/' '{print \$NF}')"
   	}
   }
     
