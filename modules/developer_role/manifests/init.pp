@@ -56,9 +56,12 @@ class developer_role (
   }
 
   if $gvm {
-    include developer_role::gvm
+    class { 'gvm' :
+      owner => $user_name,
+    }
+
     if $gvm_packages != undef {
-      create_resources(developer_role::gvm::gvm_package, $gvm_packages)
+      create_resources(gvm::package, $gvm_packages)
     }
   }
 

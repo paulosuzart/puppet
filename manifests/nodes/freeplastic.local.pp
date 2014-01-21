@@ -29,14 +29,18 @@ node 'freeplastic.local' {
     gvm_packages       => {
       	                   #groovy versions
                            'groovy'  => {version     => '1.8.8',
-                                         is_default  => true},
+                                         is_default  => true,
+                                         owner       => $user_name},
                            #grails versions
-                           'grails'  => {version     => '1.3.7',},
+                           'grails'  => {version     => '1.3.7',
+                                         owner       => $user_name},
                            'grails'  => {version     => '2.1.5',
-                                         is_default  => true},
+                                         is_default  => true,
+                                         owner       => $user_name},
                            #additional packages
                            'vertx'   => {version     => '2.0.2-final',
-                                         is_default  =>  true}
+                                         is_default  =>  true,
+                                         owner       => $user_name}
                           },
   }
 
