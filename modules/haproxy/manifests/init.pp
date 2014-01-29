@@ -3,7 +3,7 @@ class haproxy (
 	$daemon = true
 ) {
 
-  package { "haproxy":
+  package { 'haproxy' :
   	ensure => installed,
   }
 
@@ -21,16 +21,6 @@ class haproxy (
       target  => $haproxy::config_file,
       content => template('haproxy/backend.erb'),
     }
-  }
-
-  group { 'haproxy':
-    ensure => present    
-  } 
-
-  user { 'haproxy' :
-    ensure  => present,
-    groups  => ['haproxy'],
-    require => Group['haproxy']
   }
 
   file { '/etc/haproxy' :
