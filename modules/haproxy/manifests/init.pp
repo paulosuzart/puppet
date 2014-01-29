@@ -1,10 +1,26 @@
 class haproxy (
-	$maxcon = 8192,
-	$daemon = true
+	$maxcon         = 8192,
+	$daemon         = true,
+	$run_on_startup = true
 ) {
 
   package { 'haproxy' :
   	ensure => installed,
+  }
+
+  if $run_on_startup {
+  	case $operatingsystem {
+  		/(Debian|Ubuntu)/ : {
+          exec { 'run haproxy on startup' :
+          path    => "/usr/bin:/usr/sbin:/bin",
+          command => "echo \$(sed -e 's/ENABLED=0/ENABLED=1/g' /etc/default/haproxy) > /tmp/ha_autstart && mv /tmp/ha_autstart > /etc/default/haproxy",
+          unless  => "grep -i 'ENABLED=0' /etc/default/haproxy"
+          }
+        }
+     default: { 
+     	notify {'Couldnt set aupauto start for haproxy' :} 
+      }
+    }
   }
 
   $config_file = '/etc/haproxy/haproxy.cfg'
