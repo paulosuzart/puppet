@@ -13,6 +13,8 @@ class haproxy (
   	concat::fragment { "ft_$name" :
   	  target  => $haproxy::config_file,
   	  content => template('haproxy/frontend.erb'),
+  	  notify  => Service['haproxy'],
+  	  order   => '02'
     }
   }
 
@@ -20,6 +22,8 @@ class haproxy (
     concat::fragment { "be_$name" :
       target  => $haproxy::config_file,
       content => template('haproxy/backend.erb'),
+      notify  => Service['haproxy'],
+      order   => '03'
     }
   }
 
@@ -35,5 +39,6 @@ class haproxy (
   concat::fragment { 'global_defaults' :
     target   => $config_file,
     content  => template('haproxy/global.erb'),
+    order    => '01',
   }
 }

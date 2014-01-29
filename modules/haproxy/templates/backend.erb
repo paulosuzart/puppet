@@ -1,3 +1,4 @@
+
 backend <%= name %>
   mode <%= mode %>
   balance roundrobin
@@ -8,4 +9,3 @@ backend <%= name %>
 <% servers.each do |server| -%>
   server <%= server['bind'] %> weight <%= server['weight'] %>
 <% end -%>
-
