@@ -1,0 +1,18 @@
+global
+        log 127.0.0.1 local1
+        maxconn <%= maxcon %>
+        user haproxy
+        group haproxy
+        <% if daemon != '' -%>
+        daemon
+        <% end -%>
+
+defaults
+        log     global
+        mode    tcp
+        option  tcplog
+        option  dontlognull
+        retries 3
+        contimeout      5000
+        clitimeout      50000
+        srvtimeout      50000

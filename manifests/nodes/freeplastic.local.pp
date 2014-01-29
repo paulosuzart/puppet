@@ -1,9 +1,9 @@
 node 'freeplastic.local' {
   $user_full_name = extlookup(user_full_name)
-  $user_email = extlookup(user_email)
-  $user_name = extlookup(user_name)
-  $user_home = extlookup(user_home)
-  $workspace = "$user_home/workspace"
+  $user_email     = extlookup(user_email)
+  $user_name      = extlookup(user_name)
+  $user_home      = extlookup(user_home)
+  $workspace      = "$user_home/workspace"
 
   class { 'convenience' :
     setup_ssh_rsa => true,
@@ -11,6 +11,26 @@ node 'freeplastic.local' {
 
   include desktop
   include 'docker'
+
+  include haproxy
+  
+  haproxy::frontend { 'ft_mta' :
+    bind            => '127.0.0.1:25',
+    default_backend => 'be_smtp1',
+    
+  }
+
+  haproxy::backend { 'be_smtp1' :
+    servers => [{bind   => 'localhost:8025',
+                 weight => 20},
+                {bind   => 'localhost:8027',
+                 weight  => 37}
+               ],
+
+  }
+  include haproxy::service
+
+
 
   class {'developer_role':
     git           => true,
@@ -25,7 +45,7 @@ node 'freeplastic.local' {
                     'configs'         => {owner => 'dashboard',
                                           password => extlookup('pg_dashboard_password')},
     },
-    python_virtualenvs => {"$workspace/ENV" => {packages => ['setuptools', 'fabric','python-simple-hipchat']}},
+    python_virtualenvs => {"$workspace/ENV" => {packages => ['setuptools', 'fabric','python-simple-hipchat',]}},
     gvm_packages       => {
       	                   #groovy versions
                            'groovy'  => {version     => '1.8.8',

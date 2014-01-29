@@ -1,0 +1,11 @@
+backend <%= name %>
+  mode <%= mode %>
+  balance roundrobin
+  log global
+  option <%= option %>
+  timeout server 1m
+  timeout connect 5s
+<% servers.each do |server| -%>
+  server <%= server['bind'] %> weight <%= server['weight'] %>
+<% end -%>
+
