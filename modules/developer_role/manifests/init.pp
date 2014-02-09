@@ -3,12 +3,10 @@ class developer_role (
   $postgres           = false,
   $postgis            = false,
   $git                = false,
-  $gvm                = false, 
   $lein               = false,
   $pg_databases       = {},
   $change_prompt      = false,
   $python_virtualenvs = undef,
-  $gvm_packages       = undef
   ) {
  
   include developer_role::devpackages
@@ -54,15 +52,4 @@ class developer_role (
   if ($python_virtualenvs != undef) {
     create_resources(developer_role::python::python_virtualenv, $python_virtualenvs)
   }
-
-  if $gvm {
-    class { 'gvm' :
-      owner => $user_name,
-    }
-
-    if $gvm_packages != undef {
-      create_resources(gvm::package, $gvm_packages)
-    }
-  }
-
 }

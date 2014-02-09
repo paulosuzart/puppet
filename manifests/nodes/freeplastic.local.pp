@@ -38,7 +38,6 @@ node 'freeplastic.local' {
     postgis       => false,
     lein          => true,
     postgres      => true,
-    gvm           => true,
     pg_databases  => {
                     'dashboard'       => {owner    => 'dashboard',
                                           password => extlookup('pg_dashboard_password')},
@@ -46,22 +45,26 @@ node 'freeplastic.local' {
                                           password => extlookup('pg_dashboard_password')},
     },
     python_virtualenvs => {"$workspace/ENV" => {packages => ['setuptools', 'fabric','python-simple-hipchat',]}},
-    gvm_packages       => {
-      	                   #groovy versions
-                           'groovy'  => {version     => '1.8.8',
-                                         is_default  => true,
-                                         owner       => $user_name},
-                           #grails versions
-                           'grails'  => {version     => '1.3.7',
-                                         owner       => $user_name},
-                           'grails'  => {version     => '2.1.5',
-                                         is_default  => true,
-                                         owner       => $user_name},
-                           #additional packages
-                           'vertx'   => {version     => '2.0.2-final',
-                                         is_default  =>  true,
-                                         owner       => $user_name}
-                          },
+  }
+
+  class { 'gvm' :
+    owner => $user_name,
+  }
+
+  gvm::package { 'uninstalls grails 2.0.1':
+    package_name => 'grails',
+    version   => '2.0.1',
+    ensure    => absent,
+  }
+
+  gvm::package { 'grails':
+    version    => '2.1.5',
+    is_default => true
+  }
+
+  gvm::package { 'Install grails 1.3.7':
+    package_name => 'grails',
+    version      => '1.3.7',
   }
 
 }
