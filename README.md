@@ -28,7 +28,6 @@ Classe principal `developer_role`:
    - `git           => true,`. Efetua instalação do Git e customiações
    - `change_prompt => true,` Configura prompt otimizado para git e svn
    - `lein          => true,`. Instalar leiningen  [Opcional]
-   - `gvm           => true,`. Instala GVM [Opcional]
 
 **Pacotes e ferramentas instalados por padrão**
 
@@ -55,23 +54,6 @@ Criação de Virtualenv e seus pacotes instalados via pip:
                                'python-simple-hipchat']}
     }
 
-GVM Intalação de pacotes (requer : `gvm => true`)
-
-```puppet
-    gvm_packages       => {
-                           #groovy versions
-                           'groovy'  => {version     => '1.8.8',
-                                         is_default  => true},
-                           #grails versions
-                           'grails'  => {version     => '1.3.7',},
-                           'grails'  => {version     => '2.1.5',
-                                         is_default  => true},
-                           #additional packages
-                           'vertx'   => {version     => '2.0.2-final',
-                                         is_default  =>  true}
-                          },
-    }
-````
 
 Instalação chave ssh publica/privada:
 
