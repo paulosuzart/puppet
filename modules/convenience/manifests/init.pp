@@ -11,7 +11,7 @@ class convenience ($setup_ssh_rsa = false) {
     ensure => latest,
   }
 
-  package { ['curl', 'sed', 'openssh-server', 'openssh-client'] :
+  package { ['curl', 'sed', 'openssh-server', 'openssh-client', 'unzip'] :
     ensure => present,
   }
 
